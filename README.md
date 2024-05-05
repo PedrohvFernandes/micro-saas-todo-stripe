@@ -74,12 +74,17 @@ Done in 170.01s.
 ## 📎Links:
 - [ui.shadcn](https://ui.shadcn.com) - O shadcn Ui por padrão ja vai ter os server components(Componentes do lado do servidor) tendo uma requisição mais eficiente, diferente dos Client components que é do lado do browser. Esse novos componentes ja estão disponíveis no Next e na nova versão do React. E obviamente no next tem o conceito onde tudo é renderizado no lado servidor e depois entregue para o client(Server-side Rendering (SSR)), ou seja, a page é renderizada do lado do servidor e depois entregue ao client. Temos o conceito onde algumas paginas podem ser estáticas
   - Para entender melhor o next: 
+    - [Faz sentido o cache no lado do servidor?](https://www.youtube.com/shorts/vPSz3dJnSB8) - Um cache mais granular de cada requisição do lado do servidor pelos server components. Antigamente era uma cache por pagina/rotas
     - [Entenda server components do Next.js!](https://www.youtube.com/shorts/1tD9p_lnMN4)
+      -  O server components (o cliente) vai renderizar o componente após todas as promises serem finalizadas no servidor ou o servidor que vai te devolver o componente renderizado? (O servidor que vai devolver aquele trecho do jsx na response): 
+        - Ele implementa um formato de response por stream, em resumo, ele vai te devolver o HTML de forma estática que não depende de nenhum recurso pendente (Promises), mas a stream continua aberta, assim que forem sendo completas as promises, ele vai enviando nessa stream, e substituindo o código estático inicial que é renderizado usando a Suspense API do react (um loader, por exemplo). Quando tiver terminado tudo, fecha a stream de resposta e tá tudo certo.
     - [Server Components no React (tá lembrando o PHP?!)](https://www.youtube.com/watch?v=3KSxzW8x5pA&t=1s)
     - [TUDO que você precisa saber do Next 13 (isso muda tudo)](https://www.youtube.com/watch?v=0zl72thBKzo&t=2s)
     - [Next.js está virando um framework BACK-END?!](https://www.youtube.com/watch?v=eVwTlOuzT0Q&t=282s)
     - [Eu RESUMI o Next.js 14 para você! (Server Components & Actions)](https://www.youtube.com/watch?v=6JnkwfrAI-U&t=1s)
-    - [Server Side Rendering com Componentes do Next 14](https://chatgpt.com/c/0c7af3dc-9b82-4415-bb94-066b6c53d4f8)
+    - [Server Side Rendering (SSR) Next Components](https://chatgpt.com/c/5e4bebff-77bd-4f47-a49b-1a3be704237e)
+    - [Actions use server no next, server components](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations)
+    - [Server Components use server no react](https://react.dev/reference/rsc/use-server)
   - O shadcn-ui não é bem uma lib, ela é basicamente um CLI instalada no projeto, onde ele copia todos os componentes dentro do seu projeto, um design system altamente manipulável, usando o tailwindcss e radixUi
   - Para instalar ele: `npx shadcn-ui@latest init`
     - Sequencia de passos:
