@@ -93,7 +93,7 @@ Done in 170.01s.
       - Dentro de _components vai ficar os servers componentes, estrutura que foi escolhida. Para diferenciar basta colocar 'use client'
     - [Roteamento no Next.js 13](https://nextjs.org/docs/routing/introduction)
     - [Roteamento no Next.js 13](https://kinsta.com/pt/base-de-conhecimento/next-js/#:~:text=Roteamento,em%20uma%20rota%20no%20Next.)
-    - [Definindo o roteamento](https://www.alura.com.br/artigos/roteamento-eficiente-next-js-app-router) - Temos o App Router para as aplicações que estão no ritmo e usam o Next a partir da versão 13, e o Page Router para a galera que tá na versão 12 ou anterior. Use pastas aninhadas para definir uma rota e o arquivo page.jsx/tsx para tornar essa rota acessível publicamente e export essas pages como default.
+    - [Definindo o roteamento](https://www.alura.com.br/artigos/roteamento-eficiente-next-js-app-router) - Temos o App Router para as aplicações que estão no ritmo e usam o Next a partir da versão 13, e o Page Router para a galera que tá na versão 12 ou anterior. Use pastas aninhadas para definir uma rota e o arquivo page.jsx/tsx para tornar essa rota acessível publicamente e export essas pages como default. O Barra antes do auth é App e a partir dele é os segmentos de rota, nesse caso o auth --> http://localhost:3000/auth --> Ele entra na pasta auth e procura o arquivo page.tsx
   - O shadcn-ui não é bem uma lib, ela é basicamente um CLI instalada no projeto, onde ele copia todos os componentes dentro do seu projeto, um design system altamente manipulável, usando o tailwindcss e radixUi
   - Para instalar ele: `npx shadcn-ui@latest init`
     - Sequencia de passos:
@@ -106,6 +106,10 @@ Done in 170.01s.
     - Você vai poder selecionar os componentes que deseja pela barra de espaço e da enter, ou se quiser pode dar um um ctrl + barra de espaço e enter para instalar todos os componentes. Ou ir no site da documentação e olhar os que você deseja por la
 
 - [V0](https://v0.dev) - Feito pela vercel e o criador do shadcnUi. Basicamente uma IA que cria componentes. Ex por texto: a auth page with magic link form. Ele ja te entrega o codigo em react, tailwindcss e usando os proprios do shadcnUi
+
+- [NextAuth](https://next-auth.js.org) - Ela traz tudo o que precisamos de autenticação para o next.js, ela traz toda a camada, ela traz toda a integração de serviços populares, como google, twitter, facebook... Ela ja tém todo sistema de Magic Link, ja traz alguns adaptadores para fazer integração com Prisma, de ter todos os usuarios no BD de forma automatica, todo sistema de validação de Token com JWT, tudo padronizado, tendo uma boa performance, e é facil de usar.
+  - [Auth.js v5](https://authjs.dev/getting-started/migrating-to-v5)
+  - Para criar uma Api, basta colocar a pasta de Api  dentro do App e dentro dela colocamos a rota de Api, de acordo com as pastas. auth/[...nextauth]
 
 
 ## 👨‍💻 Autor:
