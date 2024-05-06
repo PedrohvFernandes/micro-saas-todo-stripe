@@ -10,6 +10,8 @@
 - Next Auth (Autenticação)
 - JWT
 - Login através do Magic Link
+- Mailtrap (Para testar o envio de email)
+- Nodemailer
 - TailwindCss
 - Typescript
 - V0 (Ia para criar certos componentes e pages de forma automática através de uma imagem do seu figma ou wireframe ou texto)
@@ -19,6 +21,9 @@
 - Lint-staged
 - Yarn
 
+## Dica: 
+ - Dica: Para rodar mais rápido localmente modifique o script dev para: next dev --turbo, isso habilitará o turbopack.
+ 
 ## 📦 Como criar o projeto:
 - Comando para criar o projeto: `yarn create next-app nome-do-projeto`
 ```bash
@@ -117,7 +122,11 @@ Done in 170.01s.
   - [Prisma Adapter](https://authjs.dev/getting-started/adapters/prisma)
     - [Naming Conventions model](https://authjs.dev/getting-started/adapters/prisma#naming-conventions)
       - Apos copiar o schema necessario do Auth, basta agora adaptar o nosso projeto, no caso criar um modelo Todo, e adaptar o modelo User(entre outros models necessarios que ele pede para copiar) que copiamos do auth para o nosso projeto, para que ele relacione com o Todo. E mudar para Sqlite
+  - [Email provider](https://next-auth.js.org/providers/email)
+  -[Prisma Adapter](https://authjs.dev/getting-started/adapters/prisma)
+    - O que é o adapter do next auth: Ele ja contem todas as funções principais da autenticação. E no caso do prisma, ele ja entrega um adapter automatico, por isso ele ja te traz aquele schema pronto, porque ja vamos ter tudo feito de forma automatica, essa integração com o banco
 
+- [Mailtrap](https://mailtrap.io) - Para testar os envios de email
 
 ## 👨‍💻 Autor:
 

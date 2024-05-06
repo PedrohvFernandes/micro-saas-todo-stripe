@@ -5,14 +5,18 @@ import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { useForm } from 'react-hook-form'
+// Para fazer a autenticação usando o next-auth da pasta services e pela pasta api auth
+import { signIn } from 'next-auth/react'
 
 // Componente criado no V0
 export function AuthForm() {
   const form = useForm()
 
   // Através dessa função pegamos os dados do formulário
-  const handleSubmit = form.handleSubmit((data) => {
-    console.log(data)
+  const handleSubmit = form.handleSubmit(async (data) => {
+    await signIn('email', {
+      email: data.email,
+    })
   })
 
   return (
