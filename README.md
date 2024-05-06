@@ -109,7 +109,14 @@ Done in 170.01s.
 
 - [NextAuth](https://next-auth.js.org) - Ela traz tudo o que precisamos de autenticação para o next.js, ela traz toda a camada, ela traz toda a integração de serviços populares, como google, twitter, facebook... Ela ja tém todo sistema de Magic Link, ja traz alguns adaptadores para fazer integração com Prisma, de ter todos os usuarios no BD de forma automatica, todo sistema de validação de Token com JWT, tudo padronizado, tendo uma boa performance, e é facil de usar.
   - [Auth.js v5](https://authjs.dev/getting-started/migrating-to-v5)
-  - Para criar uma Api, basta colocar a pasta de Api  dentro do App e dentro dela colocamos a rota de Api, de acordo com as pastas. auth/[...nextauth]
+  - Para criar uma Api, basta colocar a pasta de Api  dentro do App e dentro dela colocamos a rota de Api, de acordo com as pastas. /api/auth/[...nextauth] --> Quando fica envolvido [] é porque é uma rota dinamica, ou seja, ele usa um spread ele vai pegar tudo que vem depois do auth e vai passar para o arquivo routes.ts. Ou por exemplo, se criarmos Api/user/[uid].tsx, sem o uso do spread ele vai pegar o uid e passar para o arquivo route.ts, dentro do query ele vai pegar o uid --> /user/003
+  - [Aprenda a utilizar API Routes no NextJS e React](https://tavanoblog.com.br/post/aprenda-a-utilizar-api-routes-no-nextjs-e-react)
+  - [Api Routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes)
+
+- Prisma - O prisma é um ORM, queremos colocar os dados do usuario no BD, para isso a lib Auth ja nos prove uma model ideal para capturar os dados do usuario e colocar no BD adaptado para o prisma.
+  - [Prisma Adapter](https://authjs.dev/getting-started/adapters/prisma)
+    - [Naming Conventions model](https://authjs.dev/getting-started/adapters/prisma#naming-conventions)
+      - Apos copiar o schema necessario do Auth, basta agora adaptar o nosso projeto, no caso criar um modelo Todo, e adaptar o modelo User(entre outros models necessarios que ele pede para copiar) que copiamos do auth para o nosso projeto, para que ele relacione com o Todo. E mudar para Sqlite
 
 
 ## 👨‍💻 Autor:
