@@ -1,8 +1,5 @@
 // Pagina inicial quando o usuario estiver logado
-export function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      Landing page
-    </main>
-  )
+// AS pages tem que ficar como default para o Next.js conseguir achar. Essa page ele ja reconhece como /
+export default function Home() {
+  return <main>Landing page</main>
 }

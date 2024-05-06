@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint:next": "next lint --fix",
-    "lint:eslint": "eslint src/**/*.{ts,tsx} --fix",
+    "lint:eslint": "eslint . --fix",
     "prepare": "husky"
   },
   "dependencies": {
@@ -49,11 +49,12 @@
     "git-commit-msg-linter": "^5.0.7",
     "input-otp": "^1.2.4",
     "next": "14.2.3",
+    "next-auth": "^5.0.0-beta.17",
     "next-themes": "^0.3.0",
     "react": "^18",
     "react-day-picker": "^8.10.1",
     "react-dom": "^18",
-    "react-hook-form": "^7.51.3",
+    "react-hook-form": "^7.51.4",
     "react-resizable-panels": "^2.0.19",
     "sonner": "^1.4.41",
     "tailwind-merge": "^2.3.0",

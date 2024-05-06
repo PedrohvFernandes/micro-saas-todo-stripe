@@ -1,8 +1,8 @@
+import { AuthForm } from './_components/auth-form'
+
 // Pagina da autenticação
-export function Page() {
-  return (
-    <h1 className="flex min-h-screen flex-col items-center justify-between p-24">
-      Auth page
-    </h1>
-  )
+// As pages tem que ficar como default para o Next.js conseguir achar
+// Essa page ele ja reconhece como /auth. https://kinsta.com/pt/base-de-conhecimento/next-js/#:~:text=Roteamento,em%20uma%20rota%20no%20Next.
+export default function Page() {
+  return <AuthForm />
 }

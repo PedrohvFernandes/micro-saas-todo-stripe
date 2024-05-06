@@ -2,8 +2,9 @@
 
 ## 🚀 Tecnologias
 
-- Next.js 14 (Ele vai ser usado tanto para o front-end quanto para o back-end, por isso na instalação colocamos o App Router)
+- Next.js 14 (Ele vai ser usado tanto para o front-end quanto para o back-end, além de poder usar os server components, por isso na instalação colocamos o App Router)
 - Stripe (Para pagamentos)
+- React Hook Form (Formulários)
 - Shadcn UI (Componentes)
 - Prisma (ORM)
 - Next Auth (Autenticação)
@@ -85,6 +86,14 @@ Done in 170.01s.
     - [Server Side Rendering (SSR) Next Components](https://chatgpt.com/c/5e4bebff-77bd-4f47-a49b-1a3be704237e)
     - [Actions use server no next, server components](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations)
     - [Server Components use server no react](https://react.dev/reference/rsc/use-server)
+    - Next14: 
+     - Server component: No server component, podemos fazer components async e fazer requisição direta para o banco de dados dentro do nosso componente react de forma segura, poruque estamos renderizando do lado do servidor, e o componente ao ser renderizado no servidor o HTML é enviado para o cliente. O cliente então pode interagir com o componente, mas o componente é renderizado no servidor.
+      - Por padrão, os componentes dentro do diretório "app" são Server Components. Isso não só otimiza o desempenho, como também facilita a sua vida na hora de adotá-los. Ah, e não se esqueça: você ainda pode usar Client Components normalmente.
+     - O cliente component: é renderizado no lado do cliente, ou seja, no browser, com isso, segue os mesmos principios do react, onde podemos usar estados, usar eventos, etc. Mas não teria essa conexão direta com o BD por estar no lado do cliente
+      - Dentro de _components vai ficar os servers componentes, estrutura que foi escolhida. Para diferenciar basta colocar 'use client'
+    - [Roteamento no Next.js 13](https://nextjs.org/docs/routing/introduction)
+    - [Roteamento no Next.js 13](https://kinsta.com/pt/base-de-conhecimento/next-js/#:~:text=Roteamento,em%20uma%20rota%20no%20Next.)
+    - [Definindo o roteamento](https://www.alura.com.br/artigos/roteamento-eficiente-next-js-app-router) - Temos o App Router para as aplicações que estão no ritmo e usam o Next a partir da versão 13, e o Page Router para a galera que tá na versão 12 ou anterior. Use pastas aninhadas para definir uma rota e o arquivo page.jsx/tsx para tornar essa rota acessível publicamente e export essas pages como default.
   - O shadcn-ui não é bem uma lib, ela é basicamente um CLI instalada no projeto, onde ele copia todos os componentes dentro do seu projeto, um design system altamente manipulável, usando o tailwindcss e radixUi
   - Para instalar ele: `npx shadcn-ui@latest init`
     - Sequencia de passos:
@@ -97,6 +106,8 @@ Done in 170.01s.
     - Você vai poder selecionar os componentes que deseja pela barra de espaço e da enter, ou se quiser pode dar um um ctrl + barra de espaço e enter para instalar todos os componentes. Ou ir no site da documentação e olhar os que você deseja por la
 
 - [V0](https://v0.dev) - Feito pela vercel e o criador do shadcnUi. Basicamente uma IA que cria componentes. Ex por texto: a auth page with magic link form. Ele ja te entrega o codigo em react, tailwindcss e usando os proprios do shadcnUi
+
+
 ## 👨‍💻 Autor:
 
 - Linkedin: https://www.linkedin.com/in/pedro-henrique-vieira-fernandes
