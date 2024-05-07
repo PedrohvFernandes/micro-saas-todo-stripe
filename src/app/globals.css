@@ -33,6 +33,13 @@
       --ring: 240 10% 3.9%;
 
       --radius: 0.5rem;
+
+      /* Criadas por mim */
+      --primary-background-icons:  34.2, 81.1%, 66.9%;
+      --success: 114, 75%, 41%;
+      --success-foreground: 0 0% 98%;
+      --alert: 60, 80%, 63%;
+      --alert-foreground: 240 3.7% 15.9%;
     }
 
     .dark {
