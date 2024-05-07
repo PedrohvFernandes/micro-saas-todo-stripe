@@ -98,7 +98,7 @@ Done in 170.01s.
       - Dentro de _components vai ficar os servers componentes, estrutura que foi escolhida. Para diferenciar basta colocar 'use client'
     - [Roteamento no Next.js 13](https://nextjs.org/docs/routing/introduction)
     - [Roteamento no Next.js 13](https://kinsta.com/pt/base-de-conhecimento/next-js/#:~:text=Roteamento,em%20uma%20rota%20no%20Next.)
-    - [Definindo o roteamento](https://www.alura.com.br/artigos/roteamento-eficiente-next-js-app-router) - Temos o App Router para as aplicações que estão no ritmo e usam o Next a partir da versão 13, e o Page Router para a galera que tá na versão 12 ou anterior. Use pastas aninhadas para definir uma rota e o arquivo page.jsx/tsx para tornar essa rota acessível publicamente e export essas pages como default. O Barra antes do auth é App e a partir dele é os segmentos de rota, nesse caso o auth --> http://localhost:3000/auth --> Ele entra na pasta auth e procura o arquivo page.tsx
+    - [Definindo o roteamento](https://www.alura.com.br/artigos/roteamento-eficiente-next-js-app-router) - Temos o App Router para as aplicações que estão no ritmo e usam o Next a partir da versão 13, e o Page Router para a galera que tá na versão 12 ou anterior. Use pastas aninhadas para definir uma rota e o arquivo page.jsx/tsx para tornar essa rota acessível publicamente e export essas pages como default. O Barra antes do auth é App e a partir dele é os segmentos de rota, nesse caso o auth --> http://localhost:3000/auth --> Ele entra na pasta auth e procura o arquivo page.tsx. http://localhost:3000/ --> Ele entra na pasta app dentro de src e procura o arquivo page.tsx --> http://localhost:3000/app --> Ele entra na pasta app dentro de app e procura o arquivo page.tsx
   - O shadcn-ui não é bem uma lib, ela é basicamente um CLI instalada no projeto, onde ele copia todos os componentes dentro do seu projeto, um design system altamente manipulável, usando o tailwindcss e radixUi
   - Para instalar ele: `npx shadcn-ui@latest init`
     - Sequencia de passos:
@@ -115,6 +115,8 @@ Done in 170.01s.
 - [NextAuth](https://next-auth.js.org) - Ela traz tudo o que precisamos de autenticação para o next.js, ela traz toda a camada, ela traz toda a integração de serviços populares, como google, twitter, facebook... Ela ja tém todo sistema de Magic Link, ja traz alguns adaptadores para fazer integração com Prisma, de ter todos os usuarios no BD de forma automatica, todo sistema de validação de Token com JWT, tudo padronizado, tendo uma boa performance, e é facil de usar.
   - [Auth.js v5](https://authjs.dev/getting-started/migrating-to-v5)
   - Para criar uma Api, basta colocar a pasta de Api  dentro do App e dentro dela colocamos a rota de Api, de acordo com as pastas. /api/auth/[...nextauth] --> Quando fica envolvido [] é porque é uma rota dinamica, ou seja, ele usa um spread ele vai pegar tudo que vem depois do auth e vai passar para o arquivo routes.ts. Ou por exemplo, se criarmos Api/user/[uid].tsx, sem o uso do spread ele vai pegar o uid e passar para o arquivo route.ts, dentro do query ele vai pegar o uid --> /user/003
+  - Para resolver o erro: `[auth][error] MissingSecret: Please define a `secret`.. Read more at https://errors.authjs.dev#missingsecret` basta colocar o secret para o NextAuth
+  - [NextAuth Configuration Explained](https://chatgpt.com/c/5557f3d7-fc95-4a2e-9c10-6a62113af0c3)
   - [Aprenda a utilizar API Routes no NextJS e React](https://tavanoblog.com.br/post/aprenda-a-utilizar-api-routes-no-nextjs-e-react)
   - [Api Routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes)
 
@@ -127,6 +129,11 @@ Done in 170.01s.
     - O que é o adapter do next auth: Ele ja contem todas as funções principais da autenticação. E no caso do prisma, ele ja entrega um adapter automatico, por isso ele ja te traz aquele schema pronto, porque ja vamos ter tudo feito de forma automatica, essa integração com o banco
 
 - [Mailtrap](https://mailtrap.io) - Para testar os envios de email
+
+- O middleware que criamos é basicamente um rota intermediaria, onde ele vai fazer uma verificação se o usuario esta autenticado, se ele não estiver, ele vai redirecionar para a pagina de login, se ele estiver, ele vai deixar ele acessar a pagina que ele deseja. Isso é para que não tenhamos que ficar fazendo essa verificação em todas as paginas, e sim em um unico lugar. Ao criar o middleware dentro do src o proprio next ja vai reconhecer e vai ser um middleware global, ou seja, ele vai ser aplicado em todas as paginas, a menos que você coloque um parametro para ele não ser aplicado em uma pagina especifica em config do middleware usando o matcher. Basicamente, o middleware é executado antes que as rotas solicitadas sejam exibidas, portanto, podemos fazer uma série de verificações e até bloqueios.
+  - [Middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware)
+  - [Uso de middleware em Next.js 14](https://borstch.com/blog/development/middleware-usage-in-nextjs-14)
+  - [Cuidados ao utilizar Middleware em uma aplicação Next.js](https://marcelo-albuquerque.medium.com/cuidados-ao-utilizar-middleware-em-uma-aplicação-next-js-b544623dde47#:~:text=Basicamente%2C%20o%20middleware%20é%20executado,de%20verificações%20e%20até%20bloqueios.&text=Um%20exemplo%20interessante%20é%20quando,o%20usuário%20não%20esteja%20autenticado.)
 
 ## 👨‍💻 Autor:
 
