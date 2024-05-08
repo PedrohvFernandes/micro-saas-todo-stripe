@@ -136,6 +136,14 @@ Done in 170.01s.
   - [Uso de middleware em Next.js 14](https://borstch.com/blog/development/middleware-usage-in-nextjs-14)
   - [Cuidados ao utilizar Middleware em uma aplicação Next.js](https://marcelo-albuquerque.medium.com/cuidados-ao-utilizar-middleware-em-uma-aplicação-next-js-b544623dde47#:~:text=Basicamente%2C%20o%20middleware%20é%20executado,de%20verificações%20e%20até%20bloqueios.&text=Um%20exemplo%20interessante%20é%20quando,o%20usuário%20não%20esteja%20autenticado.)
 
+- [Layouts no next - NEXTJS 13 LAYOUTS | Conceitos avançados sobre React](https://www.youtube.com/watch?v=ylowKaeKRto)
+ - App router, root layout e layout
+    -  O root layout é o layout padrão da pagina que vai ser aplicado em todas as páginas da nossa aplicação, digamos que é o html principal de uma aplicação react sem o next, onde possui metadados, fonte, title... é a casca principal da aplicação. Necessariamente não precisa ter o nome RootLayout, basta estar dentro da pasta app dentro do src e exportar como default. E na mesma pasta tem que ter o page que vai ser o conteúdo daquela rota. Nesse caso o / é a rota principal da aplicação, geralmente considerada como a home(ex: http://localhost:3000) ele usa esse root layout e page por padrão, e através dele(/) podemos chamar outras rotas(/auth) que são pastas dentro da pasta app, e que as mesmas podem ter um layout.tsx e um page.tsx, ou somente o page.tsx e ela utiliza esse root layout por padrão do /, no fim isso é uma casca que cobre o page principal e o page das demais rotas caso ela não tenha um layout.
+        - Cada rota dentro do app ou seja cada pasta dentro da pasta app pode ter um page e um layout, o layout é o que fica por volta de todas as páginas daquela rota e das suas rotas "filhas". E dentro da mesma rota podemos ter outras pastas que viram rotas, ou seja, sua rota subsequente(filha) e assim por diante. ex: /app/landing/outra-rota/mais-uma-rota --> 5 pastas, ou seja 5 rotas a / é a pasta inicial, ou seja a app dentro do src e dentro dela tem outra pasta app, que dentro dela tem a landing... e assim por diante. Se /app nao tiver um layout, o layout que vai ser usado é o root layout do / ou seja, da pasta app dentro do src, para sua page e para as demais subsequentes rotas que vem dela, mas se ela tiver a sua page e as demais subsequentes rotas que vem a partir dela não tiverem um layout vão usar layout da /app. E o mesmo vale para as demais rotas que estão dentro de / ou seja, dentro da pasta app principal do src.
+    - App router
+      <img src=".github/notes/Explicação de rota no next.png" width="600" />
+      <img src=".github/notes/Explicação de rota no next 2.png" width="600" />
+      <img src=".github/notes/Explicação de rota no next 3.png" width="600" />
 ## 👨‍💻 Autor:
 
 - Linkedin: https://www.linkedin.com/in/pedro-henrique-vieira-fernandes
