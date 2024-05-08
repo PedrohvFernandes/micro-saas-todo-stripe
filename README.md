@@ -84,7 +84,7 @@ Done in 170.01s.
     - [Faz sentido o cache no lado do servidor?](https://www.youtube.com/shorts/vPSz3dJnSB8) - Um cache mais granular de cada requisição do lado do servidor pelos server components. Antigamente era uma cache por pagina/rotas
     - [Entenda server components do Next.js!](https://www.youtube.com/shorts/1tD9p_lnMN4)
       -  O server components (o cliente) vai renderizar o componente após todas as promises serem finalizadas no servidor ou o servidor que vai te devolver o componente renderizado? (O servidor que vai devolver aquele trecho do jsx na response): 
-        - Ele implementa um formato de response por stream, em resumo, ele vai te devolver o HTML de forma estática que não depende de nenhum recurso pendente (Promises), mas a stream continua aberta, assim que forem sendo completas as promises, ele vai enviando nessa stream, e substituindo o código estático inicial que é renderizado usando a Suspense API do react (um loader, por exemplo). Quando tiver terminado tudo, fecha a stream de resposta e tá tudo certo.
+          - Ele implementa um formato de response por stream, em resumo, ele vai te devolver o HTML de forma estática que não depende de nenhum recurso pendente (Promises), mas a stream continua aberta, assim que forem sendo completas as promises, ele vai enviando nessa stream, e substituindo o código estático inicial que é renderizado usando a Suspense API do react (um loader, por exemplo). Quando tiver terminado tudo, fecha a stream de resposta e tá tudo certo.
     - [Server Components no React (tá lembrando o PHP?!)](https://www.youtube.com/watch?v=3KSxzW8x5pA&t=1s)
     - [TUDO que você precisa saber do Next 13 (isso muda tudo)](https://www.youtube.com/watch?v=0zl72thBKzo&t=2s)
     - [Next.js está virando um framework BACK-END?!](https://www.youtube.com/watch?v=eVwTlOuzT0Q&t=282s)
@@ -126,7 +126,7 @@ Done in 170.01s.
     - [Naming Conventions model](https://authjs.dev/getting-started/adapters/prisma#naming-conventions)
       - Apos copiar o schema necessario do Auth, basta agora adaptar o nosso projeto, no caso criar um modelo Todo, e adaptar o modelo User(entre outros models necessarios que ele pede para copiar) que copiamos do auth para o nosso projeto, para que ele relacione com o Todo. E mudar para Sqlite
   - [Email provider](https://next-auth.js.org/providers/email)
-  -[Prisma Adapter](https://authjs.dev/getting-started/adapters/prisma)
+  - [Prisma Adapter](https://authjs.dev/getting-started/adapters/prisma)
     - O que é o adapter do next auth: Ele ja contem todas as funções principais da autenticação. E no caso do prisma, ele ja entrega um adapter automatico, por isso ele ja te traz aquele schema pronto, porque ja vamos ter tudo feito de forma automatica, essa integração com o banco
 
 - [Mailtrap](https://mailtrap.io) - Para testar os envios de email
