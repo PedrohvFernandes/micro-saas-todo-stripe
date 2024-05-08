@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { useForm } from 'react-hook-form'
 // Para fazer a autenticação usando o next-auth da pasta services e pela pasta api auth
 import { signIn } from 'next-auth/react'
+import { toast } from '@/components/ui/use-toast'
 
 // Componente criado no V0
 export function AuthForm() {
@@ -14,9 +15,25 @@ export function AuthForm() {
 
   // Através dessa função pegamos os dados do formulário
   const handleSubmit = form.handleSubmit(async (data) => {
-    await signIn('email', {
-      email: data.email,
-    })
+    try {
+      // Ao chamar essa função ela utiliza a rota de autenticação que criamos no next-auth, ficando dessa seguinte maneira a rota de autenticação: /api/auth/signin/email e dentro dessa rota temos o método GET e POST que são os métodos que o next-auth usa para fazer a autenticação...
+      await signIn('email', {
+        email: data.email,
+        // Aqui estamos passando o redirect para false, para que o usuário não seja redirecionado após enviar o magic link. O redirecionamento é feito pelo next-auth. Podemos definir o nosso pelo proprio next-auth em services/auth/index.ts
+        redirect: false,
+      })
+      toast({
+        title: 'Magic link sent',
+        description: 'We sent a magic link to your email.',
+        variant: 'success',
+      })
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'An error occurred. Please try again later',
+        variant: 'destructive',
+      })
+    }
   })
 
   return (
