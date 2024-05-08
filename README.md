@@ -79,6 +79,7 @@ Done in 170.01s.
 
 ## 📎Links:
 - [ui.shadcn](https://ui.shadcn.com) - O shadcn Ui por padrão ja vai ter os server components(Componentes do lado do servidor) tendo uma requisição mais eficiente, diferente dos Client components que é do lado do browser. Esse novos componentes ja estão disponíveis no Next e na nova versão do React. E obviamente no next tem o conceito onde tudo é renderizado no lado servidor e depois entregue para o client(Server-side Rendering (SSR)), ou seja, a page é renderizada do lado do servidor e depois entregue ao client. Temos o conceito onde algumas paginas podem ser estáticas
+  - [Theme](https://ui.shadcn.com/themes) - Se quiser um root com padrão deles basta ir ai e mudar de acordo com o seu gosto, mas seguindo o padrão deles, ao customizar so clicar em copy code e depois colar em global.css ou main.css...
   - Para entender melhor o next: 
     - [Faz sentido o cache no lado do servidor?](https://www.youtube.com/shorts/vPSz3dJnSB8) - Um cache mais granular de cada requisição do lado do servidor pelos server components. Antigamente era uma cache por pagina/rotas
     - [Entenda server components do Next.js!](https://www.youtube.com/shorts/1tD9p_lnMN4)
