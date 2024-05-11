@@ -140,11 +140,26 @@ Done in 170.01s.
  - App router, root layout e layout
     -  O root layout dentro do / ou seja na pasta app do src é o layout padrão da pagina que vai ser aplicado em todas as páginas da nossa aplicação, digamos que é o html principal de uma aplicação react sem o next, onde possui metadados, fonte, title... é a casca principal da aplicação. Necessariamente não precisa ter o nome RootLayout, basta estar dentro da pasta app dentro do src e exportar como default. E na mesma pasta tem que ter o page que vai ser o conteúdo daquela rota. Nesse caso o / é a rota principal da aplicação, geralmente considerada como a home(ex: http://localhost:3000) ele usa esse root layout e page por padrão, e através dele(/) podemos chamar outras rotas(ex: /auth) que são pastas dentro da pasta app, e que as mesmas podem ter um layout.tsx e um page.tsx, ou somente o page.tsx e ela utiliza esse root layout por padrão do /, no fim isso é uma casca que cobre o page principal e o page das demais rotas caso ela não tenha um layout.
         - Cada rota dentro do app ou seja cada pasta dentro da pasta app pode ter um page e um layout, o layout é o que fica por volta de todas as páginas daquela rota e das suas rotas "filhas". E dentro da mesma rota podemos ter outras pastas que viram rotas, ou seja, sua rota subsequente(filha) e assim por diante. ex: /app/landing/outra-rota/mais-uma-rota --> 5 pastas, ou seja 5 rotas a / é a pasta inicial, ou seja a app dentro do src e dentro dela tem outra pasta app, que dentro dela tem a landing... e assim por diante. Se /app nao tiver um layout, o layout que vai ser usado é o root layout do / ou seja, da pasta app dentro do src, para sua page e para as demais subsequentes rotas que vem dela, mas se ela tiver o layout e as demais subsequentes rotas que vem a partir dela não tiverem um layout vão usar layout da /app. E o mesmo vale para as demais rotas que estão dentro de / ou seja, dentro da pasta app principal do src.
+        - Outro exemplo é a pasta settings dentro da app --> / --> App dentro da src, app --> Dentro do / que é a app dentro do src, e a settings dentro do /app que é a pasta app. Logo localhost:3000/app/settings | app(/)>app(/app)>settings(/settings) --> 3 pastas, ou seja 3 rotas, a home, app e a settings. Se a settings não tiver um layout, ela vai usar o layout da app, que é a onde ela esta dentro, e se a app não tiver um layout, ela vai usar o layout da home, que é a pasta app dentro do src.
     - App router
       
       <img src=".github/notes/Explicação de rota no next.png" width="600" />
       <img src=".github/notes/Explicação de rota no next 2.png" width="600" />
       <img src=".github/notes/Explicação de rota no next 3.png" width="600" />
+
+-  Composition Pattern o famoso O do SOLID
+  - [Composition Pattern](https://dev.to/ricardolmsilva/composition-pattern-in-react-28mj)
+  - [Implementando Composition Pattern em aplicações React](https://vinniciusgomes.medium.com/implementando-composition-pattern-em-aplicacoes-react-4e8dc92742ff#:~:text=O%20padrão%20de%20composição%2C%20ou,partir%20de%20partes%20mais%20simples.)
+  - Um exemplo disso é no sidebar, e nesses outros repos: 
+    - [maratona-ignite-lab-design-system](https://github.com/PedrohvFernandes/maratona-ignite-lab-design-system/tree/main)
+    - [Projeto para uma empresa que fiz](https://github.com/PedrohvFernandes/pedrohvFernandes-web-page-portfolio/tree/main/Web/assets/projects/FreelancerRebox/src/Alterações/Links%20das%20plataformas%20apos%20%20a%20compra/CardAppPlatforms)
+    - [Cupcakes](https://github.com/PedrohvFernandes/cupcakes/tree/main/cupcakes/src)
+    - [Não controle seu componente por props](https://www.linkedin.com/posts/vitormarkis_n%C3%A3o-use-props-em-react-activity-7192508293808844800-CTcQ?utm_source=share&utm_medium=member_desktop)
+    -[Como saber se criei boas abstrações](https://www.linkedin.com/posts/vitormarkis_como-criar-boas-abstrações-activity-7164596851290095616--Uqv/?utm_source=share&utm_medium=member_desktop)
+    - [Ou o proprio radix utiliza desse pattern](https://www.radix-ui.com)
+      - [Ex de um componente deles](https://www.radix-ui.com/themes/docs/components/checkbox-group)
+    - [O proprio shadcnUi utiliza desse pattern](https://ui.shadcn.com)
+
 ## 👨‍💻 Autor:
 
 - Linkedin: https://www.linkedin.com/in/pedro-henrique-vieira-fernandes
