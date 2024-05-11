@@ -12,11 +12,12 @@ type Props = {
 
 export async function UserInfo({ user }: Readonly<Props>) {
   if (!user) return
+  if (!user.email) return console.error('User email not found')
 
   return (
     <div className="flex flex-col items-center justify-center space-y-4">
       <Avatar>
-        <AvatarFallback>U</AvatarFallback>
+        <AvatarFallback className="uppercase">{user.email[0]}</AvatarFallback>
       </Avatar>
       <span>{user.email}</span>
       {/* 
