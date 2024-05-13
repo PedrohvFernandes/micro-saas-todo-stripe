@@ -2,16 +2,16 @@
 'use client'
 
 import {
-  Sidebar,
-  SidebarHeader,
-  // SidebarHeaderTitle,
-  SidebarMain,
-  SidebarNav,
-  SidebarNavHeader,
-  SidebarNavHeaderTitle,
-  SidebarNavMain,
-  SidebarNavLink,
-  SidebarFooter,
+  DashboardSidebar,
+  DashboardSidebarHeader,
+  // DashboardSidebarHeaderTitle,
+  DashboardSidebarMain,
+  DashboardSidebarNav,
+  DashboardSidebarNavHeader,
+  DashboardSidebarNavHeaderTitle,
+  DashboardSidebarNavMain,
+  DashboardSidebarNavLink,
+  DashboardSidebarFooter,
 } from '@/components/dashboard/sidebar'
 import { HomeIcon, MixerHorizontalIcon } from '@radix-ui/react-icons'
 // Tem que ser o next/navigation do next, se for o do next/router vai ser o hook do antigo padrão pages do next e o navigation é do novo padrão App router
@@ -21,8 +21,13 @@ import {
 } from 'next/navigation'
 import { UserDropdown } from './user-dropdown'
 import { Logo } from '@/components/logo'
+import { Session } from 'next-auth'
 
-export function MainSidebar() {
+type MainSidebarProps = {
+  user: Session['user']
+}
+
+export function MainSidebar({ user }: MainSidebarProps) {
   const pathname = usePathname()
 
   const isActive = (path: string) => {
@@ -30,45 +35,49 @@ export function MainSidebar() {
   }
 
   return (
-    /* <Sidebar paths={[{ label: 'home', path: '/' }]} /> */
-    <Sidebar>
-      <SidebarHeader>
+    /* <DashboardSidebar paths={[{ label: 'home', path: '/' }]} /> */
+    <DashboardSidebar>
+      <DashboardSidebarHeader>
         <Logo />
-      </SidebarHeader>
+      </DashboardSidebarHeader>
 
       {/* 
         No lugar do flex-grow, poderia usar o flex-1
       */}
-      <SidebarMain className="flex flex-col flex-grow">
-        <SidebarNav>
-          <SidebarNavMain>
-            <SidebarNavLink href="/app" active={isActive('/app')}>
+      <DashboardSidebarMain className="flex flex-col flex-grow">
+        <DashboardSidebarNav>
+          <DashboardSidebarNavMain>
+            <DashboardSidebarNavLink href="/app" active={isActive('/app')}>
               <HomeIcon className="mr-3" />
               Tarefas
-            </SidebarNavLink>
-            <SidebarNavLink
+            </DashboardSidebarNavLink>
+            <DashboardSidebarNavLink
               href="/app/settings"
               active={isActive('/app/settings')}
             >
               <MixerHorizontalIcon className="mr-3" />
               Configurações
-            </SidebarNavLink>
-          </SidebarNavMain>
-        </SidebarNav>
+            </DashboardSidebarNavLink>
+          </DashboardSidebarNavMain>
+        </DashboardSidebarNav>
 
-        <SidebarNav className="mt-auto">
-          <SidebarNavHeader>
-            <SidebarNavHeaderTitle>Links Extras</SidebarNavHeaderTitle>
-          </SidebarNavHeader>
-          <SidebarNavMain>
-            <SidebarNavLink href="/">Precisa de ajuda ?</SidebarNavLink>
-            <SidebarNavLink href="/">Site</SidebarNavLink>
-          </SidebarNavMain>
-        </SidebarNav>
-      </SidebarMain>
-      <SidebarFooter>
-        <UserDropdown />
-      </SidebarFooter>
-    </Sidebar>
+        <DashboardSidebarNav className="mt-auto">
+          <DashboardSidebarNavHeader>
+            <DashboardSidebarNavHeaderTitle>
+              Links Extras
+            </DashboardSidebarNavHeaderTitle>
+          </DashboardSidebarNavHeader>
+          <DashboardSidebarNavMain>
+            <DashboardSidebarNavLink href="/">
+              Precisa de ajuda ?
+            </DashboardSidebarNavLink>
+            <DashboardSidebarNavLink href="/">Site</DashboardSidebarNavLink>
+          </DashboardSidebarNavMain>
+        </DashboardSidebarNav>
+      </DashboardSidebarMain>
+      <DashboardSidebarFooter>
+        <UserDropdown user={user} />
+      </DashboardSidebarFooter>
+    </DashboardSidebar>
   )
 }

@@ -30,7 +30,7 @@ import Link from 'next/link'
 
 // <T = unknown>  --> Estamos dizendo que o tipo padrão é unknown, ou seja, se não passarmos nada ele vai ser unknown, dessa forma conseguimos passar qualquer tipo de propriedade para o componente, extender a tipagaem do componente
 // Se colocar um any no lugar do unknown, ele vai aceitar qualquer coisa, mas o unknown é mais seguro, porque ele não aceita qualquer coisa, ele aceita qualquer coisa, mas ele não sabe o que é, então ele não deixa você fazer nada com ele, a não ser que você faça um cast
-export type SidebarGenericProps<T = unknown> = {
+export type DashboardSidebarGenericProps<T = unknown> = {
   children: React.ReactNode
   className?: string
 } & T
@@ -38,7 +38,10 @@ export type SidebarGenericProps<T = unknown> = {
 // Com isso iremos usar o pattern composition
 
 // Um componente que tem varios componentes dentro dele, ou seja, um componente que é composto por outros componentes
-export function Sidebar({ children, className }: SidebarGenericProps) {
+export function DashboardSidebar({
+  children,
+  className,
+}: DashboardSidebarGenericProps) {
   // O cn nada mais é que um util que shadcnui da para nós e dentro dele usa o twMerge para fazer a junção das classes do tailwind com as classes que passamos. Ou seja, podemos mesclar dois classnames, o nosso classname do proprio componente e o classname que passamos como propriedade. Passamos isso em volta do cn, porque o tailwind so vai processar as classes no momento da build e quando utilizamos esse cn em volta, estamos dizendo para ele que essas classes são dinamicas e que ele deve processar no momento da execução, na hora de processar o componente
   return (
     <aside
@@ -51,7 +54,10 @@ export function Sidebar({ children, className }: SidebarGenericProps) {
   )
 }
 
-export function SidebarHeader({ children, className }: SidebarGenericProps) {
+export function DashboardSidebarHeader({
+  children,
+  className,
+}: DashboardSidebarGenericProps) {
   return (
     <header className={cn(`px-6 py-3 border-b border-border ${className}`)}>
       {children}
@@ -59,29 +65,38 @@ export function SidebarHeader({ children, className }: SidebarGenericProps) {
   )
 }
 
-export function SidebarHeaderTitle({
+export function DashboardSidebarHeaderTitle({
   children,
   className,
-}: SidebarGenericProps) {
+}: DashboardSidebarGenericProps) {
   return <h2 className={cn(`${className}`)}>{children}</h2>
 }
 
-export function SidebarMain({ children, className }: SidebarGenericProps) {
+export function DashboardSidebarMain({
+  children,
+  className,
+}: DashboardSidebarGenericProps) {
   return <main className={cn(`px-3 ${className}`)}>{children}</main>
 }
 
-export function SidebarNav({ children, className }: SidebarGenericProps) {
+export function DashboardSidebarNav({
+  children,
+  className,
+}: DashboardSidebarGenericProps) {
   return <nav className={cn(`${className}`)}>{children}</nav>
 }
 
-export function SidebarNavHeader({ children, className }: SidebarGenericProps) {
+export function DashboardSidebarNavHeader({
+  children,
+  className,
+}: DashboardSidebarGenericProps) {
   return <header className={cn(`${className}`)}>{children}</header>
 }
 
-export function SidebarNavHeaderTitle({
+export function DashboardSidebarNavHeaderTitle({
   children,
   className,
-}: SidebarGenericProps) {
+}: DashboardSidebarGenericProps) {
   return (
     <h4
       className={cn(
@@ -93,27 +108,30 @@ export function SidebarNavHeaderTitle({
   )
 }
 
-export function SidebarNavMain({ children, className }: SidebarGenericProps) {
+export function DashboardSidebarNavMain({
+  children,
+  className,
+}: DashboardSidebarGenericProps) {
   return <main className={cn(`flex flex-col  ${className}`)}>{children}</main>
 }
 
-type SidebarNavLinkProps = {
+type DashboardSidebarNavLinkProps = {
   href: string
   active?: boolean
-} & SidebarGenericProps
+} & DashboardSidebarGenericProps
 
 // Pode juntar o type dessa maneira também: passando como um generic
-// export function SidebarNavLink({
+// export function DashboardSidebarNavLink({
 //   children,
 //   className,
 //   href,
-// }: SidebarGenericProps<SidebarNavLinkProps>) {
-export function SidebarNavLink({
+// }: DashboardSidebarGenericProps<DashboardSidebarNavLinkProps>) {
+export function DashboardSidebarNavLink({
   children,
   className,
   href,
   active,
-}: SidebarNavLinkProps) {
+}: DashboardSidebarNavLinkProps) {
   return (
     <Link
       href={href}
@@ -126,7 +144,10 @@ export function SidebarNavLink({
   )
 }
 
-export function SidebarFooter({ children, className }: SidebarGenericProps) {
+export function DashboardSidebarFooter({
+  children,
+  className,
+}: DashboardSidebarGenericProps) {
   return (
     <footer className={cn(`p-6 mt-auto border-t border-border ${className}`)}>
       {children}
