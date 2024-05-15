@@ -17,7 +17,7 @@ export function AuthForm() {
   const handleSubmit = form.handleSubmit(async (data) => {
     try {
       // Ao chamar essa função ela utiliza a rota de autenticação que criamos no next-auth, ficando dessa seguinte maneira a rota de autenticação: /api/auth/signin/email e dentro dessa rota temos o método GET e POST que são os métodos que o next-auth usa para fazer a autenticação...
-      await signIn('email', {
+      await signIn('nodemailer', {
         email: data.email,
         // Aqui estamos passando o redirect para false, para que o usuário não seja redirecionado após enviar o magic link. O redirecionamento é feito pelo next-auth. Podemos definir o nosso pelo proprio next-auth em services/auth/index.ts
         redirect: false,
@@ -33,6 +33,8 @@ export function AuthForm() {
         description: 'An error occurred. Please try again later',
         variant: 'destructive',
       })
+    } finally {
+      form.reset()
     }
   })
 
@@ -62,8 +64,14 @@ export function AuthForm() {
               {...form.register('email', { required: true })}
             />
           </div>
-          <Button className="w-full" type="submit">
-            Send magic link
+          <Button
+            className="w-full"
+            type="submit"
+            disabled={form.formState.isSubmitting}
+          >
+            {form.formState.isSubmitting
+              ? 'Sending magic link...'
+              : 'Send magic link'}
           </Button>
         </form>
       </div>
