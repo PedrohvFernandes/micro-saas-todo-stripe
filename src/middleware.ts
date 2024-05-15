@@ -19,7 +19,7 @@ export function middleware(request: NextRequest) {
   }
 
   // Se o pathname incluir o /app  e não tiver um token, redirecionamos para /auth
-  if (pathname === '/app' && !token) {
+  if (pathname.includes('/app') && !token) {
     return NextResponse.redirect(new URL(getUrl('/auth')))
   }
 }
