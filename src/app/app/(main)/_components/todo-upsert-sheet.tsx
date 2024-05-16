@@ -12,7 +12,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet'
-import { Todo } from './todo-data-table'
+import { Todo } from '../types'
 import { useRef } from 'react'
 import {
   Form,
