@@ -80,6 +80,7 @@ model Todo {
   // Relação Varios para 1. No caso a tarefa possui um so usuario
   user User @relation(fields: [userId], references: [id])
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  doneAt    DateTime?
 }
