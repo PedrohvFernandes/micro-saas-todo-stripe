@@ -148,6 +148,10 @@ Done in 170.01s.
       <img src=".github/notes/Explicação de rota no next 2.png" width="600" />
       <img src=".github/notes/Explicação de rota no next 3.png" width="600" />
 
+- Como separar os _components de tal rota(pasta) ? Ex: App>app --> Dentro dela tem uma pasta (main) dentro dessa pasta fica o page.tsx dessa rota(pasta) no caso /app, ou seja, esse page dentro do main é relacionado com a rota /app e a pasta _components dentro dessa main é relacionado somente com a rota /app porque você a separou os componentes dela das demais rotas dentro da pasta app>app, ex: settings, caso se fizer isso em app>app>settings, ou seja, colocar um (main) e colocar os _components dentro de settings, esses componentes vão ser so para o settings, agora se colocar _componentes dentro da app>app esses componentes vao ser por exemplo da propria app e para a pasta(rota) settings, ou seja, pra todas as rotas(pastas) dentro de app>app inclusive do page.tsx da rota /app que está dentro do (main), porque esses componentes são do layout dentro de app>app, e se é do layout é todas as rotas que vem subsequente do /app
+  - _components --> nomenclatura que escolhemos
+  - Alem de (main) pode chamar de (home), independentemente do nome
+
 -  Composition Pattern o famoso O do SOLID
   - [Composition Pattern](https://dev.to/ricardolmsilva/composition-pattern-in-react-28mj)
   - [Implementando Composition Pattern em aplicações React](https://vinniciusgomes.medium.com/implementando-composition-pattern-em-aplicacoes-react-4e8dc92742ff#:~:text=O%20padrão%20de%20composição%2C%20ou,partir%20de%20partes%20mais%20simples.)
