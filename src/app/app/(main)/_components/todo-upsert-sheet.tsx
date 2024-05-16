@@ -5,7 +5,6 @@ import { Input } from '@/components/ui/input'
 
 import {
   Sheet,
-  SheetClose,
   SheetContent,
   SheetDescription,
   SheetFooter,
@@ -49,24 +48,23 @@ export function TodoUpsertSheet({ children }: TodoUpsertSheet) {
         <Form {...form}>
           <form onSubmit={onSubmit} className="space-y-8 h-screen">
             <SheetHeader>
-              <SheetTitle>Create todo</SheetTitle>
+              <SheetTitle>Upsert todo</SheetTitle>
               <SheetDescription>
-                Make changes to your profile here. Click save when you&aposre
-                done.
+                Add or edit your todo item here. Click save when you re done.
               </SheetDescription>
             </SheetHeader>
 
             <FormField
               control={form.control}
-              name="username"
+              name="title"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
+                  <FormLabel>Title</FormLabel>
                   <FormControl>
-                    <Input placeholder="shadcn" {...field} />
+                    <Input placeholder="Enter your todo title" {...field} />
                   </FormControl>
                   <FormDescription>
-                    This is your public display name.
+                    This will be the publicy displayed name for the task.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -74,9 +72,7 @@ export function TodoUpsertSheet({ children }: TodoUpsertSheet) {
             />
 
             <SheetFooter className="mt-auto">
-              <SheetClose asChild>
-                <Button type="submit">Save changes</Button>
-              </SheetClose>
+              <Button type="submit">Save changes</Button>
             </SheetFooter>
           </form>
         </Form>
