@@ -40,89 +40,17 @@ import {
 } from '@/components/ui/table'
 import { Badge } from '@/components/ui/badge'
 import { Todo } from '../types'
-
-export const columns: ColumnDef<Todo>[] = [
-  {
-    accessorKey: 'status',
-    // O header desse é simplesmente um texto
-    header: 'Status',
-    cell: ({ row }) => {
-      const { doneAt } = row.original
-      const status: 'done' | 'waiting' = doneAt ? 'done' : 'waiting'
-      const statusVariant: 'outline' | 'secondary' = doneAt
-        ? 'outline'
-        : 'secondary'
-
-      return <Badge variant={statusVariant}>{status}</Badge>
-    },
-  },
-  {
-    // Key de acesso para a coluna. Aqui tem que estar de acordo com a interface definida em ColumnDef, no caso Todo
-    accessorKey: 'title',
-    // Título da coluna. Nesse caso é um botão com um ícone de seta para cima ou para baixo
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="link"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Title
-          <CaretSortIcon className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
-    // Conteúdo da célula. Aqui tem que estar de acordo com a interface definida em ColumnDef. Atraves do getValue é possível acessar o valor da linha dessa coluna
-    cell: ({ row }) => <div>{row.getValue('title')}</div>,
-  },
-  {
-    accessorKey: 'createdAt',
-    header: () => <div className="text-right">CreatedAt</div>,
-    cell: ({ row }) => {
-      return (
-        // Pelo original é possível acessar o valor da linha dessa coluna
-        <div className="text-right font-medium">
-          {row.original.createdAt.toLocaleString()}
-        </div>
-      )
-    },
-  },
-  {
-    id: 'actions',
-    enableHiding: false,
-    cell: ({ row }) => {
-      // Novamente usando o original para acessar o valor das colunas
-      const todo = row.original
-
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <DotsHorizontalIcon className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(todo.id)}
-            >
-              Copy todo ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Mark as done</DropdownMenuItem>
-            <DropdownMenuItem>Delete</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )
-    },
-  },
-]
+import { useRouter } from 'next/navigation'
+import { deleteTodo, upsertTodo } from '../actions'
+import { toast } from '@/components/ui/use-toast'
 
 type TodoDataTableProps = {
   data: Todo[]
 }
 
 export function TodoDataTable({ data }: TodoDataTableProps) {
+  const router = useRouter()
+
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
@@ -130,6 +58,110 @@ export function TodoDataTable({ data }: TodoDataTableProps) {
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
+
+  const handleDeleteTodo = async (todo: Todo) => {
+    await deleteTodo({ id: todo.id })
+    router.refresh()
+
+    toast({
+      title: 'Todo deleted',
+      description: 'Todo deleted successfully',
+      variant: 'destructive',
+    })
+  }
+  const handleToggleDoneTodo = async (todo: Todo) => {
+    const doneAt = todo.doneAt ? null : new Date()
+
+    await upsertTodo({ id: todo.id, doneAt })
+    router.refresh()
+
+    toast({
+      title: 'Update Successful',
+      description: 'The todo item has been successfully updated.',
+      variant: 'success',
+    })
+  }
+
+  const columns: ColumnDef<Todo>[] = [
+    {
+      accessorKey: 'status',
+      // O header desse é simplesmente um texto
+      header: 'Status',
+      cell: ({ row }) => {
+        const { doneAt } = row.original
+        const status: 'done' | 'waiting' = doneAt ? 'done' : 'waiting'
+        const statusVariant: 'outline' | 'secondary' = doneAt
+          ? 'outline'
+          : 'secondary'
+
+        return <Badge variant={statusVariant}>{status}</Badge>
+      },
+    },
+    {
+      // Key de acesso para a coluna. Aqui tem que estar de acordo com a interface definida em ColumnDef, no caso Todo
+      accessorKey: 'title',
+      // Título da coluna. Nesse caso é um botão com um ícone de seta para cima ou para baixo
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="link"
+            onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          >
+            Title
+            <CaretSortIcon className="ml-2 h-4 w-4" />
+          </Button>
+        )
+      },
+      // Conteúdo da célula. Aqui tem que estar de acordo com a interface definida em ColumnDef. Atraves do getValue é possível acessar o valor da linha dessa coluna
+      cell: ({ row }) => <div>{row.getValue('title')}</div>,
+    },
+    {
+      accessorKey: 'createdAt',
+      header: () => <div className="text-right">CreatedAt</div>,
+      cell: ({ row }) => {
+        return (
+          // Pelo original é possível acessar o valor da linha dessa coluna
+          <div className="text-right font-medium">
+            {row.original.createdAt.toLocaleString()}
+          </div>
+        )
+      },
+    },
+    {
+      id: 'actions',
+      enableHiding: false,
+      cell: ({ row }) => {
+        // Novamente usando o original para acessar o valor das colunas
+        const todo = row.original
+
+        return (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <span className="sr-only">Open menu</span>
+                <DotsHorizontalIcon className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuItem
+                onClick={() => navigator.clipboard.writeText(todo.id)}
+              >
+                Copy todo ID
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => handleToggleDoneTodo(todo)}>
+                {todo.doneAt ? 'Mark as not done' : 'Mark as done'}
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleDeleteTodo(todo)}>
+                Delete
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )
+      },
+    },
+  ]
 
   const table = useReactTable({
     data,

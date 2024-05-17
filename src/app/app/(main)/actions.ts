@@ -4,7 +4,7 @@
 
 import { auth } from '@/services/auth'
 import { prisma } from '@/services/database'
-import { upsertTodoSchema } from './schema'
+import { deleteTodoSchema, upsertTodoSchema } from './schema'
 
 // Aqui vamos ver qual que é o usuário que esta logado no sistema e retornamos as tarefas dele
 export async function getUserTodos() {
@@ -83,4 +83,45 @@ export async function upsertTodo(input: upsertTodoSchema) {
     },
   })
   return todo
+}
+
+export async function deleteTodo(input: deleteTodoSchema) {
+  const session = await auth()
+
+  if (!session?.user?.id) {
+    return {
+      error: 'User not found',
+      data: null,
+    }
+  }
+
+  const todo = await prisma.todo.findUnique({
+    where: {
+      id: input.id,
+      userId: session?.user?.id,
+    },
+    // Pra otimizar a query, eu trago so o ID
+    select: {
+      id: true,
+    },
+  })
+
+  if (!todo) {
+    return {
+      error: 'Todo not found',
+      data: null,
+    }
+  }
+
+  await prisma.todo.delete({
+    where: {
+      id: input.id,
+      userId: session?.user?.id,
+    },
+  })
+
+  return {
+    error: null,
+    data: 'Todo deleted successfully',
+  }
 }
