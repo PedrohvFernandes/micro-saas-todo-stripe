@@ -24,6 +24,11 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { useForm } from 'react-hook-form'
+import { upsertTodo } from '../actions'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { upsertTodoSchema } from '../schema'
+import { useRouter } from 'next/navigation'
+import { toast } from '@/components/ui/use-toast'
 
 type TodoUpsertSheet = {
   children?: React.ReactNode
@@ -32,11 +37,30 @@ type TodoUpsertSheet = {
 
 export function TodoUpsertSheet({ children }: TodoUpsertSheet) {
   const ref = useRef<HTMLDivElement>(null)
+  const router = useRouter()
 
-  const form = useForm()
+  const form = useForm({
+    // Integração do zod com o react-hook-form
+    resolver: zodResolver(upsertTodoSchema),
+  })
 
-  const onSubmit = form.handleSubmit((data) => {
-    console.log(data)
+  const onSubmit = form.handleSubmit(async (data) => {
+    // Insere ou atualiza o todo no BD
+    await upsertTodo(data)
+    // Ele faz uma revalidação de todos os dados que temos na página, tudo integrado com o server actions
+    router.refresh()
+
+    // Simulamos um click na div que esta em volta do children, que é o botão de adicionar tarefa, isso faz com que o sheet feche
+    ref.current?.click()
+
+    toast({
+      title: `Todo ${data.title} saved`,
+      description: 'Your todo has been saved successfully.',
+      duration: 5000,
+      variant: 'success',
+    })
+
+    form.reset()
   })
 
   return (
