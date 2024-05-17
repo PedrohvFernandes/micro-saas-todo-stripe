@@ -41,49 +41,15 @@ import {
 import { Badge } from '@/components/ui/badge'
 import { Todo } from '../types'
 
-const data: Todo[] = [
-  {
-    id: '1',
-    title: 'Buy groceries',
-    createdAt: new Date('2021-09-01T12:00:00Z'),
-    updatedAt: new Date('2021-09-01T12:00:00Z'),
-  },
-  {
-    id: '2',
-    title: 'Walk the dog',
-    createdAt: new Date('2021-09-01T12:00:00Z'),
-    updatedAt: new Date('2021-09-01T12:00:00Z'),
-    finishedAt: new Date('2021-09-01T12:00:00Z'),
-  },
-  {
-    id: '3',
-    title: 'Do laundry',
-    createdAt: new Date('2021-09-01T12:00:00Z'),
-    updatedAt: new Date('2021-09-01T12:00:00Z'),
-  },
-  {
-    id: '4',
-    title: 'Clean the house',
-    createdAt: new Date('2021-09-01T12:00:00Z'),
-    updatedAt: new Date('2021-09-01T12:00:00Z'),
-  },
-  {
-    id: '5',
-    title: 'Buy a new car',
-    createdAt: new Date('2021-09-01T12:00:00Z'),
-    updatedAt: new Date('2021-09-01T12:00:00Z'),
-  },
-]
-
 export const columns: ColumnDef<Todo>[] = [
   {
     accessorKey: 'status',
     // O header desse é simplesmente um texto
     header: 'Status',
     cell: ({ row }) => {
-      const { finishedAt } = row.original
-      const status: 'done' | 'waiting' = finishedAt ? 'done' : 'waiting'
-      const statusVariant: 'outline' | 'secondary' = finishedAt
+      const { doneAt } = row.original
+      const status: 'done' | 'waiting' = doneAt ? 'done' : 'waiting'
+      const statusVariant: 'outline' | 'secondary' = doneAt
         ? 'outline'
         : 'secondary'
 
@@ -152,7 +118,11 @@ export const columns: ColumnDef<Todo>[] = [
   },
 ]
 
-export function TodoDataTable() {
+type TodoDataTableProps = {
+  data: Todo[]
+}
+
+export function TodoDataTable({ data }: TodoDataTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
