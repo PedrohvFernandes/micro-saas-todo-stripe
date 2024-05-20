@@ -153,17 +153,17 @@ Done in 170.01s.
   - Alem de (main) pode chamar de (home), independentemente do nome
 
 -  Composition Pattern o famoso O do SOLID
-  - [Composition Pattern](https://dev.to/ricardolmsilva/composition-pattern-in-react-28mj)
-  - [Implementando Composition Pattern em aplicações React](https://vinniciusgomes.medium.com/implementando-composition-pattern-em-aplicacoes-react-4e8dc92742ff#:~:text=O%20padrão%20de%20composição%2C%20ou,partir%20de%20partes%20mais%20simples.)
-  - Um exemplo disso é no sidebar, e nesses outros repos: 
-    - [maratona-ignite-lab-design-system](https://github.com/PedrohvFernandes/maratona-ignite-lab-design-system/tree/main)
-    - [Projeto para uma empresa que fiz](https://github.com/PedrohvFernandes/pedrohvFernandes-web-page-portfolio/tree/main/Web/assets/projects/FreelancerRebox/src/Alterações/Links%20das%20plataformas%20apos%20%20a%20compra/CardAppPlatforms)
-    - [Cupcakes](https://github.com/PedrohvFernandes/cupcakes/tree/main/cupcakes/src)
-    - [Não controle seu componente por props](https://www.linkedin.com/posts/vitormarkis_n%C3%A3o-use-props-em-react-activity-7192508293808844800-CTcQ?utm_source=share&utm_medium=member_desktop)
-    -[Como saber se criei boas abstrações](https://www.linkedin.com/posts/vitormarkis_como-criar-boas-abstrações-activity-7164596851290095616--Uqv/?utm_source=share&utm_medium=member_desktop)
-    - [Ou o proprio radix utiliza desse pattern](https://www.radix-ui.com)
-      - [Ex de um componente deles](https://www.radix-ui.com/themes/docs/components/checkbox-group)
-    - [O proprio shadcnUi utiliza desse pattern](https://ui.shadcn.com)
+   - [Composition Pattern](https://dev.to/ricardolmsilva/composition-pattern-in-react-28mj)
+   - [Implementando Composition Pattern em aplicações React](https://vinniciusgomes.medium.com/implementando-composition-pattern-em-aplicacoes-react-4e8dc92742ff#:~:text=O%20padrão%20de%20composição%2C%20ou,partir%20de%20partes%20mais%20simples.)
+   - Um exemplo disso é no sidebar, e nesses outros repos: 
+     - [maratona-ignite-lab-design-system](https://github.com/PedrohvFernandes/maratona-ignite-lab-design-system/tree/main)
+     - [Projeto para uma empresa que fiz](https://github.com/PedrohvFernandes/pedrohvFernandes-web-page-portfolio/tree/main/Web/assets/projects/FreelancerRebox/src/Alterações/Links%20das%20plataformas%20apos%20%20a%20compra/CardAppPlatforms)
+     - [Cupcakes](https://github.com/PedrohvFernandes/cupcakes/tree/main/cupcakes/src)
+     - [Não controle seu componente por props](https://www.linkedin.com/posts/vitormarkis_n%C3%A3o-use-props-em-react-activity-7192508293808844800-CTcQ?utm_source=share&utm_medium=member_desktop)
+     -[Como saber se criei boas abstrações](https://www.linkedin.com/posts/vitormarkis_como-criar-boas-abstrações-activity-7164596851290095616--Uqv/?utm_source=share&utm_medium=member_desktop)
+     - [Ou o proprio radix utiliza desse pattern](https://www.radix-ui.com)
+       - [Ex de um componente deles](https://www.radix-ui.com/themes/docs/components/checkbox-group)
+     - [O proprio shadcnUi utiliza desse pattern](https://ui.shadcn.com)
 
 ## 👨‍💻 Autor:
 
