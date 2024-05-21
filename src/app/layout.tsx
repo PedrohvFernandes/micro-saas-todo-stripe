@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { Toaster } from '@/components/ui/toaster'
+import { ThemeProvider } from './_components/theme-provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,7 +19,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {children}
+        <ThemeProvider
+          attribute="class"
+          // Se tu colocar system, ele vai pegar o tema do sistema do usuario, se tu colocar dark ele vai pegar o tema dark, se tu colocar light ele vai pegar o tema light...
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
         <Toaster />
       </body>
     </html>
