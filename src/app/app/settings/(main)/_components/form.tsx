@@ -57,7 +57,7 @@ export function ProfileForm({ defaultValues }: ProfileFormProps) {
   })
   return (
     <Form {...form}>
-      <form onSubmit={onSubmit} className="space-y-8 h-screen">
+      <form onSubmit={onSubmit} className="space-y-8">
         <Card>
           <CardHeader>
             <CardTitle>Name</CardTitle>
