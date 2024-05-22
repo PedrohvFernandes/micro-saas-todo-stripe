@@ -51,8 +51,8 @@ export function ThemeForm() {
     theme.setTheme(data.theme)
 
     toast({
-      title: 'Theme updated',
-      description: `Your theme has been updated to ${data.theme}`,
+      title: 'Tema atualizado com sucesso!',
+      description: `Seu tema foi atualizado para ${data.theme}!`,
     })
   })
 
@@ -61,9 +61,9 @@ export function ThemeForm() {
       <form onSubmit={onSubmit} className="space-y-8">
         <Card>
           <CardHeader>
-            <CardTitle>Theme</CardTitle>
+            <CardTitle>Tema</CardTitle>
             <CardDescription>
-              Select the theme for the dashboard.
+              Selecione o tema que você deseja usar.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -140,8 +140,8 @@ export function ThemeForm() {
         <SheetFooter className="mt-auto">
           <Button type="submit" disabled={form.formState.isLoading}>
             {/* {form.formState.isLoading ? 'Saving...' : 'Save changes'} */}
-            {form.formState.isSubmitting && 'Saving...'}
-            {!form.formState.isSubmitting && 'Save changes'}
+            {form.formState.isSubmitting && 'Salvando...'}
+            {!form.formState.isSubmitting && 'Salvar alterações'}
           </Button>
         </SheetFooter>
       </form>

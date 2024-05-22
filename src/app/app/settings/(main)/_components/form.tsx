@@ -49,8 +49,8 @@ export function ProfileForm({ defaultValues }: ProfileFormProps) {
     router.refresh()
 
     toast({
-      title: `${data.name} has been saved`,
-      description: 'Your profile has been updated',
+      title: `${data.name} atualizado com sucesso!`,
+      description: 'Seu perfil foi atualizado com sucesso!',
       duration: 5000,
       variant: 'success',
     })
@@ -60,9 +60,9 @@ export function ProfileForm({ defaultValues }: ProfileFormProps) {
       <form onSubmit={onSubmit} className="space-y-8">
         <Card>
           <CardHeader>
-            <CardTitle>Name</CardTitle>
+            <CardTitle>Nome</CardTitle>
             <CardDescription>
-              This will be the publicly displayed name.
+              Este será o nome exibido publicamente.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -71,9 +71,9 @@ export function ProfileForm({ defaultValues }: ProfileFormProps) {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>Nome</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter your name" {...field} />
+                    <Input placeholder="Digite seu nome" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -85,8 +85,8 @@ export function ProfileForm({ defaultValues }: ProfileFormProps) {
           <CardHeader>
             <CardTitle>Email</CardTitle>
             <CardDescription>
-              Please contact email support contact@micro-saas.com to change your
-              email.
+              Por favor contate o suporte por email contact@micro-saas.com para
+              alterar seu email.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -97,7 +97,11 @@ export function ProfileForm({ defaultValues }: ProfileFormProps) {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter your email" readOnly {...field} />
+                    <Input
+                      placeholder="Digite your email"
+                      readOnly
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -109,8 +113,8 @@ export function ProfileForm({ defaultValues }: ProfileFormProps) {
         <SheetFooter className="mt-auto">
           <Button type="submit" disabled={form.formState.isLoading}>
             {/* {form.formState.isLoading ? 'Saving...' : 'Save changes'} */}
-            {form.formState.isSubmitting && 'Saving...'}
-            {!form.formState.isSubmitting && 'Save changes'}
+            {form.formState.isSubmitting && 'Salvando...'}
+            {!form.formState.isSubmitting && 'Salvar alterações'}
           </Button>
         </SheetFooter>
       </form>
