@@ -166,6 +166,11 @@ Done in 170.01s.
        - [Ex de um componente deles](https://www.radix-ui.com/themes/docs/components/checkbox-group)
      - [O proprio shadcnUi utiliza desse pattern](https://ui.shadcn.com)
 
+## Fluxo do sistema
+
+- [Fluxo do sistema](https://excalidraw.com/#json=bV_Ajgw-wYmtQKqFdDmDN,OGQfyOxHVNHQ-zROCNDPnQ)
+<img src="./.github/fluxo-do-sistema.png">
+
 ## 👨‍💻 Autor:
 
 - Linkedin: https://www.linkedin.com/in/pedro-henrique-vieira-fernandes
