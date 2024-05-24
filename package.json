@@ -8,6 +8,10 @@
     "start": "next start",
     "lint:next": "next lint --fix",
     "lint:eslint": "eslint . --fix",
+    "migrate-dev": "prisma migrate dev --name",
+    "migrate-deploy": "prisma migrate deploy",
+    "generate": "prisma generate",
+    "studio-bd": "prisma studio",
     "prepare": "husky"
   },
   "dependencies": {
