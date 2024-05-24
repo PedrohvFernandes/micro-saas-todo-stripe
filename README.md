@@ -259,6 +259,24 @@ Done in 170.01s.
     POST /app/settings/billing 500 in 1441ms
     ```
 
+- Usando webhook do stripe:
+  - [Webhooks](https://dashboard.stripe.com/test/webhooks)
+  - Para testar temos que ter a CLI do stripe, para instalar
+    - [CLI](https://docs.stripe.com/stripe-cli)
+    - Apos instalar entre com o comando: `stripe login`
+      - Abre o link
+      - Selecione a conta, ex: 'Micro-Saas Todo Next' e permite o acesso
+    - Depois entre com o comando: `stripe listen --forward-to localhost:3000/api/stripe/webhook` ou seja, passamos o nosso endpoint do webhook para o stripe ficar ouvindo, e nessa api que teremos os tipos de eventos que poderão acontecer durante o checkout no stripe, qualquer coisinha que der ele ira usar esse endpoint para nos avisar, e assim podemos fazer o tratamento necessário
+      - Lembrando que isso aqui é para testar, em produção temos que ter um endpoint seguro e pelo link [Webhooks](https://dashboard.stripe.com/test/webhooks) passamos o endpoint para ele ficar de olho, clicando em "Adicione endpoint" e passando o endpoint e os eventos que queremos que ele fique de olho
+      - Enquanto estamos testando clique em "Teste em um ambiente local", nele ira te falar os passos que você devera seguir para testar, que no caso são esses que estamos fazendo
+    - Certo após isso, em [Teste em um ambiente local](https://dashboard.stripe.com/test/webhooks/create?endpoint_location=local) ele ira falar que as duas primeiras etapas estão concluídas
+      - Ele ira gerar uma secret Key para testar, coloque em uma env e use no constructEvent
+
+      - Obs: Não feche a conexão com o stripe no terminal, porque se não ele não vai conseguir ouvir os eventos que estão acontecendo no stripe. Então toda vez que tiver algum evento no stripe, essa CLI vai fazer um proxy com o stripe pra automaticamente o evento que estiver vindo do stripe passar para o nosso endpoint, e assim podemos fazer o tratamento necessário por esse endpoint.
+        - Com a cli aberta conseguimos ver todos os webhooks que acontecem em segundo plano na criação de um customer, no pagamento, se foi mal sucedido ou não. E todos possuem um type e por eles que conseguimos tratar, enviar para o BD alguma info necessaria caso de certo a compra... e assim por diante
+        - Se quiser uma colinha além dessa no terminal do stripe, podemos ir em [Adicione um endpoint](https://dashboard.stripe.com/test/webhooks/create?endpoint_location=hosted) em "Selecionar eventos" temos todos os eventos possiveis que podem acontecer no stripe, e ai com base no que você quer monitorar basta pesquisar e tratar o evento no endpoint. Lembrando que nesse link você pode adicionar um endpoint para produção, uma desc e claramente a lista de eventos que serão tratados por esse endpoint clicando em "Selecionar eventos".
+        - E para tratar esses eventos pegamos o type deles, ou seja, o nome de cada um e colocamos dentro de um switch na rota(endpoint) que vai tratar eles, todo evento que tiver o stripe chama esse endpoint(/api/stripe/webhook).
+
 ## Fluxo do sistema
 
 - [Fluxo do sistema](https://excalidraw.com/#json=bV_Ajgw-wYmtQKqFdDmDN,OGQfyOxHVNHQ-zROCNDPnQ)
