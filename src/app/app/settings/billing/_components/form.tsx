@@ -11,14 +11,14 @@ import {
 import { useTransition } from 'react'
 import { createCheckoutSessionAction } from '../actions'
 import { Button } from '@/components/ui/button'
-import { PlanReturn } from '@/services/stripe'
+import { UserCurrentPlanReturn } from '@/services/stripe'
 import { Progress } from '@/components/ui/progress'
 
 type FormData = {
-  plan: PlanReturn
+  planUser: UserCurrentPlanReturn
 }
 
-export function Form({ plan }: FormData) {
+export function Form({ planUser }: FormData) {
   // Como colocar loading em um botão que faz uma ação do lado do servidor https://github.com/vercel/next.js/discussions/51371
   const [isPending, startTransition] = useTransition()
 
@@ -38,19 +38,24 @@ export function Form({ plan }: FormData) {
           <CardTitle>Uso do plano</CardTitle>
           <CardDescription>
             Você está atualmente no{' '}
-            <span className="font-bold uppercase">{plan.name}</span>
+            <span className="font-bold uppercase">{planUser.name}</span>
           </CardDescription>
         </CardHeader>
         <CardContent className="pt-6">
           <div className="space-y-2">
             <header className=" flex items-center justify-between">
               <span className="text-muted-foreground text-sm">
-                1/{plan.quota.TASKS}
+                {planUser.quota.TASKS.current}/{planUser.quota.TASKS.available}
               </span>
-              <span className="text-muted-foreground text-sm">20%</span>
+              <span className="text-muted-foreground text-sm">
+                {planUser.quota.TASKS.usage}%
+              </span>
             </header>
             <main>
-              <Progress value={34} />
+              <Progress
+                value={planUser.quota.TASKS.current}
+                // max={planUser.quota.TASKS.available}
+              />
             </main>
           </div>
         </CardContent>

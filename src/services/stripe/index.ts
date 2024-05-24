@@ -174,7 +174,7 @@ type Plans = {
   [key: string]: Plan
 }
 
-export type PlanReturn = {
+type PlanReturn = {
   name: string | number | undefined
   quota: {
     TASKS: number
@@ -199,5 +199,60 @@ export const getPlanByPrice = (priceId: string): PlanReturn => {
   return {
     name: planKey,
     quota: plan.quota,
+  }
+}
+
+export type UserCurrentPlanReturn = {
+  name: string | number | undefined
+  quota: {
+    TASKS: {
+      available: number
+      current: number
+      usage: number
+    }
+  }
+}
+
+export const getUserCurrentPlan = async (
+  userId: string,
+): Promise<UserCurrentPlanReturn> => {
+  const user = await prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+    select: {
+      stripePriceId: true,
+    },
+  })
+
+  // Vemos se o usuario e o stripePriceId existem
+  if (!user || !user.stripePriceId) {
+    throw new Error('User not found or user has no stripePriceId')
+  }
+
+  const plan = getPlanByPrice(user.stripePriceId)
+
+  const tasksCount = await prisma.todo.count({
+    where: {
+      userId,
+    },
+  })
+
+  // Ele ve quantas tasks tem de acordo com aquele plano do arquivo de config
+  const availableTasks = plan.quota.TASKS
+  // Quantas taks o usuario tem
+  const currentTasks = tasksCount
+  // A porcentagem de uso de tasks
+  const usageTasks = (currentTasks / availableTasks) * 100
+
+  return {
+    name: plan.name,
+    quota: {
+      TASKS: {
+        available: availableTasks,
+        current: currentTasks,
+        usage: usageTasks, // percentage
+      },
+    },
   }
 }

@@ -1,11 +1,11 @@
 import { auth } from '@/services/auth'
-import { getPlanByPrice } from '@/services/stripe'
+import { getUserCurrentPlan } from '@/services/stripe'
 import { Form } from './_components/form'
 
 export default async function Page() {
   const session = await auth()
 
-  const plan = getPlanByPrice(session?.user.stripePriceId as string)
+  const plan = await getUserCurrentPlan(session?.user.id as string)
 
-  return <Form plan={plan} />
+  return <Form planUser={plan} />
 }
