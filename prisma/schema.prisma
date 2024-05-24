@@ -54,6 +54,15 @@ model User {
   // Se o usuario logar com o google ele basicamente traz a imagem do google ou qualquer outra rede extenar
   image         String?
 
+  // Id do cliente no stripe
+  stripeCustomerId         String?
+  // Id da assinatura dele
+  stripeSubscriptionId     String?
+  // Status da assinatura
+  stripeSubscriptionStatus String?
+  // O priceId dele de qual plano ele esta usando, que é o plano atual dele
+  stripePriceId            String?
+
   accounts Account[]
   sessions Session[]
   // Relação Varios para 1. No caso o usuario possui muitas tarefas
