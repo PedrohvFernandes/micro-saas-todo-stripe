@@ -166,6 +166,99 @@ Done in 170.01s.
        - [Ex de um componente deles](https://www.radix-ui.com/themes/docs/components/checkbox-group)
      - [O proprio shadcnUi utiliza desse pattern](https://ui.shadcn.com)
 
+- Quando for criar uma sessão de portal BillingPortal no stripe, como por exemplo quando for atualizar a assinatura do client. Fazemos isso em settings>billing>actions indo no service do stripe em checkout. Ao fazer isso em modo test do stripe precisamos fazer isso:
+  - [BillingPortal](https://dashboard.stripe.com/test/settings/billing/portal)
+    - Ative o link de teste
+    - Depois em assinaturas>Marque a opção "Os cliente podem alternar planos" selecione o plano que deseja que o cliente possa alternar
+    - Depois clique em salvar alterações
+  - Se não fizer ele vai dar o seguinte erro:
+    ```bash
+        StripeInvalidRequestError: You can’t create a portal session in test mode until you save your customer portal settings in test mode at https://dashboard.stripe.com/test/settings/billing/portal.
+        at StripeError.generate (C:\Users\Pedro\OneDrive\Documentos\GitHub\micro-saas-todo-stripe\.next\server\chunks\ssr\node_modules_stripe_esm_21dd88._.js:538:20)
+        at res.toJSON.then.__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$stripe$2f$esm$2f$Error$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__.StripeAPIError.message (C:\Users\Pedro\OneDrive\Documentos\GitHub\micro-saas-todo-stripe\.next\server\chunks\ssr\node_modules_stripe_esm_21dd88._.js:6159:181)
+        at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+      type: 'StripeInvalidRequestError',
+      raw: {
+        message: 'You can’t create a portal session in test mode until you save your customer portal settings in test mode at https://dashboard.stripe.com/test/settings/billing/portal.',
+        request_log_url: 'https://dashboard.stripe.com/test/logs/req_cnAHW3n3odib1Z?t=1716512820',
+        type: 'invalid_request_error',
+        headers: {
+          'access-control-allow-credentials': 'true',
+          'access-control-allow-methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+          'access-control-allow-origin': '*',
+          'access-control-expose-headers': 'Request-Id, Stripe-Manage-Version, Stripe-Should-Retry, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required',
+          'access-control-max-age': '300',
+          'cache-control': 'no-cache, no-store',
+          connection: 'keep-alive',
+          'content-length': '341',
+          'content-security-policy': "report-uri https://q.stripe.com/csp-report?p=v1%2Fbilling_portal%2Fsessions; block-all-mixed-content; default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'self'; script-src 'self' 'report-sample'; style-src 'self'",
+          'content-type': 'application/json',
+          'cross-origin-opener-policy-report-only': 'same-origin; report-to="coop"',
+          date: 'Fri, 24 May 2024 01:07:00 GMT',
+          'idempotency-key': 'stripe-node-retry-c9e63a0f-2e14-4b19-8f77-475ff64bfb04',
+          'original-request': 'req_cnAHW3n3odib1Z',
+          'report-to': '{"group":"coop","max_age":8640,"endpoints":[{"url":"https://q.stripe.com/coop-report?s=billing-api-srv"}],"include_subdomains":true}',
+          'reporting-endpoints': 'coop="https://q.stripe.com/coop-report?s=billing-api-srv"',
+          'request-id': 'req_cnAHW3n3odib1Z',
+          server: 'nginx',
+          'strict-transport-security': 'max-age=63072000; includeSubDomains; preload',
+          'stripe-should-retry': 'false',
+          'stripe-version': '2024-04-10',
+          vary: 'Origin',
+          'x-content-type-options': 'nosniff',
+          'x-stripe-routing-context-priority-tier': 'api-testmode'
+        },
+        statusCode: 400,
+        requestId: 'req_cnAHW3n3odib1Z'
+      },
+      rawType: 'invalid_request_error',
+      code: undefined,
+      doc_url: undefined,
+      param: undefined,
+      detail: undefined,
+      headers: {
+        'access-control-allow-credentials': 'true',
+        'access-control-allow-methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+        'access-control-allow-origin': '*',
+        'access-control-expose-headers': 'Request-Id, Stripe-Manage-Version, Stripe-Should-Retry, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required',
+        'access-control-max-age': '300',
+        'cache-control': 'no-cache, no-store',
+        connection: 'keep-alive',
+        'content-length': '341',
+        'content-security-policy': "report-uri https://q.stripe.com/csp-report?p=v1%2Fbilling_portal%2Fsessions; block-all-mixed-content; default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'self'; script-src 'self' 'report-sample'; style-src 'self'",
+        'content-type': 'application/json',
+        'cross-origin-opener-policy-report-only': 'same-origin; report-to="coop"',
+        date: 'Fri, 24 May 2024 01:07:00 GMT',
+        'idempotency-key': 'stripe-node-retry-c9e63a0f-2e14-4b19-8f77-475ff64bfb04',
+        'original-request': 'req_cnAHW3n3odib1Z',
+        'report-to': '{"group":"coop","max_age":8640,"endpoints":[{"url":"https://q.stripe.com/coop-report?s=billing-api-srv"}],"include_subdomains":true}',
+        'reporting-endpoints': 'coop="https://q.stripe.com/coop-report?s=billing-api-srv"',
+        'request-id': 'req_cnAHW3n3odib1Z',
+        server: 'nginx',
+        'strict-transport-security': 'max-age=63072000; includeSubDomains; preload',
+        'stripe-should-retry': 'false',
+        'stripe-version': '2024-04-10',
+        vary: 'Origin',
+        'x-content-type-options': 'nosniff',
+        'x-stripe-routing-context-priority-tier': 'api-testmode'
+      },
+      requestId: 'req_cnAHW3n3odib1Z',
+      statusCode: 400,
+      charge: undefined,
+      decline_code: undefined,
+      payment_intent: undefined,
+      payment_method: undefined,
+      payment_method_type: undefined,
+      setup_intent: undefined,
+      source: undefined
+    }
+    ⨯ Error: Error creating checkout session
+        at createCheckoutSession (C:\Users\Pedro\OneDrive\Documentos\GitHub\micro-saas-todo-stripe\.next\server\chunks\ssr\[root of the server]__00cfd1._.js:316:15)
+        at async createCheckoutSessionAction (C:\Users\Pedro\OneDrive\Documentos\GitHub\micro-saas-todo-stripe\.next\server\chunks\ssr\[root of the server]__00cfd1._.js:672:29)
+    digest: "168932240"
+    POST /app/settings/billing 500 in 1441ms
+    ```
+
 ## Fluxo do sistema
 
 - [Fluxo do sistema](https://excalidraw.com/#json=bV_Ajgw-wYmtQKqFdDmDN,OGQfyOxHVNHQ-zROCNDPnQ)
