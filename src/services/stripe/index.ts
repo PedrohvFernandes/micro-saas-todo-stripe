@@ -117,3 +117,87 @@ export const createCheckoutSession = async (
     throw new Error('Error creating checkout session')
   }
 }
+
+// Função que atualiza o status do plano do usuario no nosso bd. Ele recebe o objeto do webhook do stripe
+export const handleProcessWebhookUpdatedSubscription = async (event: {
+  object: Stripe.Subscription
+}) => {
+  const stripeCustomerId = event.object.customer as string
+  const stripeSubscriptionId = event.object.id
+  const stripeSubscriptionStatus = event.object.status
+  // Pegamos o id que mandamos na hora do checkout quando o usuario quis mudar de plano
+  const stripePriceId = event.object.items.data[0].price.id
+
+  // Verifica se o usuario existe no nosso bd, mas agora pelo stripeCustomerId ou stripeSubscriptionId, porque agora o usuario ja tem um stripeCustomerId, ou seja, um plano, logo o usuario no nosso bd ja tem um id do stripe. FindFirst primeiro usuario que encontrar
+  const userExists = await prisma.user.findFirst({
+    where: {
+      OR: [
+        {
+          stripeCustomerId,
+        },
+        {
+          stripeSubscriptionId,
+        },
+      ],
+    },
+    select: {
+      id: true,
+    },
+  })
+
+  if (!userExists) {
+    throw new Error('user of stripeCustomerId not found')
+  }
+
+  // Atualiza o stripeSubscriptionStatus e stripePriceId do usuario no nosso bd, o status do plano do usuario
+  await prisma.user.update({
+    where: {
+      id: userExists.id,
+    },
+    data: {
+      stripeCustomerId,
+      stripeSubscriptionId,
+      stripeSubscriptionStatus,
+      stripePriceId,
+    },
+  })
+}
+
+type Plan = {
+  priceId: string
+  quota: {
+    TASKS: number
+  }
+}
+
+type Plans = {
+  [key: string]: Plan
+}
+
+export type PlanReturn = {
+  name: string | number | undefined
+  quota: {
+    TASKS: number
+  }
+}
+
+export const getPlanByPrice = (priceId: string): PlanReturn => {
+  const plans: Plans = config.stripe.plans as Plans
+
+  // O plankKey é o nome do plano, free ou pro. Ex: free: { priceId: process.env.STRIPE_FREE_PLAN_ID, quota: { TASKS: 5 } }. a key(chave) free vai servir como nome. So pegamos se o priceId for igual ao priceId que passamos
+  const planKey = Object.keys(plans).find(
+    (key) => plans[key].priceId === priceId,
+  ) as keyof Plans | undefined
+
+  // Dentro do objeto plans, pegamos o plano que tem a chave igual ao planKey
+  const plan = planKey ? plans[planKey] : null
+
+  if (!plan) {
+    throw new Error(`Plan not found for priceId: ${priceId}`)
+  }
+
+  return {
+    name: planKey,
+    quota: plan.quota,
+  }
+}
