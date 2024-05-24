@@ -4,6 +4,7 @@ import EmailProvider from 'next-auth/providers/nodemailer'
 
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import { prisma } from '../database'
+import { createStripeCustomer } from '../stripe'
 
 export const {
   // Pegamos esses handlers e passamos para api>auth>[...nextauth]>route.ts
@@ -32,5 +33,14 @@ export const {
       from: process.env.EMAIL_FROM,
     }),
   ],
+  events: {
+    // Quando o usuário é criado na nossa aplicação pro bd e  criamos um customer no stripe
+    createUser: async (message) => {
+      await createStripeCustomer({
+        email: message.user.email as string,
+        name: message.user.name as string,
+      })
+    },
+  },
   secret: process.env.SECRET,
 })
